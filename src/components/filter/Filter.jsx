@@ -1,8 +1,7 @@
-import PropTypes from 'prop-types';
-import css from './Filter.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFilter } from 'redux/selectors';
 import { filteredContacts } from 'redux/contactsSlice';
+import { FormControl, FormLabel, Input, SimpleGrid } from '@chakra-ui/react';
 export const Filter = () => {
   const dispatch = useDispatch();
   const filter = useSelector(getFilter);
@@ -11,19 +10,18 @@ export const Filter = () => {
   };
   return (
     <>
-      <label className={css.labelSearch}>Find contacts by name</label>
-      <input
-        className={css.inputSearch}
-        type="text"
-        name="filter"
-        placeholder="Search"
-        value={filter}
-        onChange={handleFilterChange}
-      />
+      <SimpleGrid p={12} w={700} ml="auto" mr="auto">
+        <FormControl>
+          <FormLabel>Find contacts by name</FormLabel>
+          <Input
+            placeholder="Search name"
+            type="text"
+            name="number"
+            value={filter}
+            onChange={handleFilterChange}
+          />
+        </FormControl>
+      </SimpleGrid>
     </>
   );
-};
-Filter.propTypes = {
-  filter: PropTypes.string,
-  handleFilterChange: PropTypes.func,
 };

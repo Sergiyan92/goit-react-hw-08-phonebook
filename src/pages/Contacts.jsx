@@ -20,7 +20,6 @@ const Contacts = () => {
   return (
     <>
       <Logout />
-      <title>Your contacts</title>
       <ContactForm />
       <Filter />
       <div>{isLoading && !error && <Loader />}</div>

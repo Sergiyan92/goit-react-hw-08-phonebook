@@ -1,8 +1,14 @@
-import css from './Contactform.module.css';
+import {
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  SimpleGrid,
+  Tooltip,
+} from '@chakra-ui/react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/operations';
-
 import { selectContacts } from 'redux/selectors';
 
 export const ContactForm = () => {
@@ -36,30 +42,36 @@ export const ContactForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={css.contactForm}>
-      <label className={css.label}>Name</label>
-      <input
-        className={css.input}
-        type="text"
-        name="name"
-        title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-        required
-        value={name}
-        onChange={handleChange}
-      />
-      <label className={css.label}>Phone</label>
-      <input
-        className={css.input}
-        type="tel"
-        name="number"
-        title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-        required
-        value={number}
-        onChange={handleChange}
-      />
-      <button className={css.button} type="submit">
-        Add Contact
-      </button>
+    <form onSubmit={handleSubmit}>
+      <SimpleGrid w={700} gap={12} ml="auto" mr="auto" p={12} columns={2}>
+        <FormControl isRequired>
+          <FormLabel>Name</FormLabel>
+          <Input
+            placeholder="Name"
+            type="text"
+            onChange={handleChange}
+            name="name"
+            value={name}
+          />
+        </FormControl>
+        <FormControl isRequired>
+          <FormLabel>Phone</FormLabel>
+          <Input
+            placeholder="Phone"
+            type="tel"
+            name="number"
+            value={number}
+            onChange={handleChange}
+          />
+        </FormControl>
+      </SimpleGrid>
+      <SimpleGrid justifyContent="center">
+        <Tooltip hasArrow label="Add Contact on phonebook" bg="red.600">
+          <Button type="submit" colorScheme="blue">
+            Add Contact
+          </Button>
+        </Tooltip>
+      </SimpleGrid>
     </form>
   );
 };
